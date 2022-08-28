@@ -28,6 +28,7 @@ public class EnemyController : MonoBehaviour
         if(col.tag=="Bullet")
         {
             health--;
+            
            
         }
     }
@@ -39,6 +40,8 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
             SoundController.Instance.gameManager.PlayOneShot(SoundController.Instance.enemyDead[0],0.1f);
+            ScoreManager.Instance.score++;
+            ScoreManager.Instance.scoreText.text=ScoreManager.Instance.score.ToString();
         }
     }
 }

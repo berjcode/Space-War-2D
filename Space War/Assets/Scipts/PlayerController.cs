@@ -21,7 +21,24 @@ public class PlayerController : MonoBehaviour
 
    void Update()
    {
-        if(Input.GetKeyDown("space"))
+       FireSystem1();
+       FireSystem2();
+
+       
+
+        float x = SimpleInput.GetAxisRaw("Horizontal");
+        float y= SimpleInput.GetAxisRaw("Vertical");
+
+
+        Vector2 direction = new Vector2 (x,y).normalized;
+
+        Move(direction);
+   }
+
+
+   public void FireSystem1()
+   {
+    if(Input.GetKeyDown("space"))
         {
             GameObject bullet01 = (GameObject)Instantiate (PlayerBullet);
             bullet01.transform.position = bulletPositionFirst.transform.position;
@@ -30,21 +47,17 @@ public class PlayerController : MonoBehaviour
 
         
         }
+   }
 
-        if(Input.GetKeyDown("x"))
+
+   public void FireSystem2()
+   {
+    if(Input.GetKeyDown("x"))
         {
             GameObject bullet02 = (GameObject) Instantiate (playerBullet2);
             bullet02.transform.position = bulletPosiitonSecond.transform.position;
             SoundController.Instance.gameManager.PlayOneShot(SoundController.Instance.fireShoot[1],0.05f);
         }
-
-        float x = Input.GetAxisRaw("Horizontal");
-        float y= Input.GetAxisRaw("Vertical");
-
-
-        Vector2 direction = new Vector2 (x,y).normalized;
-
-        Move(direction);
    }
 
    void Move( Vector2 direction)
@@ -72,4 +85,10 @@ public class PlayerController : MonoBehaviour
 
 
    }
+
+
+
+    
+
 }
+
