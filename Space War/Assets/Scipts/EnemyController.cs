@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
 
     private Transform playerPos;
 
-    private int health =3;
+    private int health =6;
     void Start()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();

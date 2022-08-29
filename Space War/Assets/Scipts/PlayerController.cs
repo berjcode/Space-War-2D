@@ -35,10 +35,10 @@ public class PlayerController : MonoBehaviour
         Move(direction);
    }
 
-
+ #region  FireSystem 
    public void FireSystem1()
    {
-    if(Input.GetKeyDown("space"))
+    if(Input.GetMouseButtonDown(0))
         {
             GameObject bullet01 = (GameObject)Instantiate (PlayerBullet);
             bullet01.transform.position = bulletPositionFirst.transform.position;
@@ -52,14 +52,15 @@ public class PlayerController : MonoBehaviour
 
    public void FireSystem2()
    {
-    if(Input.GetKeyDown("x"))
+    if(Input.GetMouseButtonDown(0))
         {
             GameObject bullet02 = (GameObject) Instantiate (playerBullet2);
             bullet02.transform.position = bulletPosiitonSecond.transform.position;
-            SoundController.Instance.gameManager.PlayOneShot(SoundController.Instance.fireShoot[1],0.05f);
+            SoundController.Instance.gameManager.PlayOneShot(SoundController.Instance.fireShoot[0],0.05f);
         }
    }
-
+    #endregion
+    #region Move
    void Move( Vector2 direction)
    {
         Vector2 min=Camera.main.ViewportToWorldPoint (new Vector2 (0,0));
@@ -86,9 +87,29 @@ public class PlayerController : MonoBehaviour
 
    }
 
+#endregion
+
+void FixedUpdate()
+{
+     #region Horizontal Limit
+        if (transform.position.x >2.39f)
+        {
+            Vector2 rightLimit = new Vector2(2.39f, transform.position.y);
+            transform.position = rightLimit;
+        }
+        
+        if (transform.position.x < -2.39f)
+        {
+            Vector2 leftLimit = new Vector2(-2.39f, transform.position.y);
+            transform.position = leftLimit;
+        }
 
 
-    
+
+        #endregion
+
+}
+
 
 }
 
